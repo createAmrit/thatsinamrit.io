@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dare Game by Amrit</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    input, button, select {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+    }
+    button {
+      background: #ff3c78;
+      color: white;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #888;
+      cursor: not-allowed;
+    }
+    .dare-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #2e2e2e;
+      border-radius: 10px;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 500px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 20px;
+        max-width: 95%;
+        border-radius: 15px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      input, button, select {
+        font-size: 14px;
+        padding: 8px;
+      }
+      .dare-box {
+        padding: 10px;
+        font-size: 14px;
+      }
+      .footer {
+        font-size: 12px;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔥 Dare Challenge 🔥</h2>
+    <p>Enter your name (optional):</p>
+    <input type="text" id="nameInput" placeholder="Your Name" />
+
+    <p>Pick a number from 1 to 10:</p>
+    <select id="numberSelect">
+      <option disabled selected value>-- select a number --</option>
+    </select>
+
+    <button id="dareButton" onclick="showDare()">Get Dare</button>
+
+    <div class="dare-box" id="dareBox" style="display: none;"></div>
+  </div>
+
+  <div class="footer">
+    Made with ❤️ by <strong>@igl_amrit_</strong>
+  </div>
+
+  <script>
+    const dares = [
+      "Text Amrit and say 'Naha liya kar bhai, bht garmi hai'.",
+      "Tell your loving one that he/she matters a lot and is beloved endlessly.",
+      "Call your best friend and talk to him/her for exactly 7 minutes 57 seconds.",
+      "Dedicate a song to your crush.",
+      "Send a picture of yourself to the friend you last talked to a long time ago and say nothing.",
+      "Check your last chats with your best friend.",
+      "Confess to your best friend and tell her she's so silly and annoying.",
+      "Draw something blindfolded.",
+      "Show your last 3 Google searches.",
+      "Say 'I love you' to the last person you chatted with."
+    ];
+
+    // Populate number select options
+    const select = document.getElementById("numberSelect");
+    for (let i = 1; i <= 10; i++) {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.innerText = i;
+      select.appendChild(opt);
+    }
+
+    function showDare() {
+      const name = document.getElementById("nameInput").value.trim();
+      const number = document.getElementById("numberSelect").value;
+
+      if (!number) {
+        alert("Please select a number.");
+        return;
+      }
+
+      const dare = dares[parseInt(number) - 1];
+      const message = name ? `Hey ${name}, your dare is:` : "Your dare is:";
+
+      document.getElementById("dareBox").style.display = "block";
+      document.getElementById("dareBox").innerHTML = `
+        <h3>${message}</h3>
+        <p><strong>${dare}</strong></p>
+        <p style="margin-top: 15px; font-size: 14px;">
+          Complete the dare and DM your photo to <br>
+          <a 
+            style="color:#fff; background:#ff3c78; padding:8px 18px; border-radius:8px; text-decoration:none; display:inline-block; margin-top:8px;"
+            href="instagram://user?username=igl_amrit_"
+            target="_blank"
+          >@igl_amrit_ (Open in Instagram App)</a> 💥<br>
+          Best one wins a surprise gift!
+        </p>
+      `;
+
+      // Disable further selection
+      select.disabled = true;
+      document.getElementById("dareButton").disabled = true;
+    }
+  </script>
+</body>
+</html>
